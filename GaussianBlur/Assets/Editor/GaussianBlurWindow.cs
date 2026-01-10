@@ -51,6 +51,7 @@ public class GaussianBlurWindow : EditorWindow
         sb.AppendLine();
 
         sb.AppendLine($"static const int GAUSSIAN_TAP_COUNT = {weights.Length};");
+        sb.AppendLine($"static const float GAUSSIAN_SIGMA = {sigma:0.000000f};");
         sb.AppendLine();
 
         sb.AppendLine("static const float GaussianWeights[GAUSSIAN_TAP_COUNT] = {");

@@ -5,6 +5,7 @@
 #define GAUSSIAN_BLUR_INCLUDED
 
 static const int GAUSSIAN_TAP_COUNT = 19;
+static const float GAUSSIAN_SIGMA = 12.000000f;
 
 static const float GaussianWeights[GAUSSIAN_TAP_COUNT] = {
     0.033323f,

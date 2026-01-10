@@ -16,15 +16,15 @@ Shader "Hidden/GaussianBlur"
         float4 color = 0;
 
         // Center sample
-        color += SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_LinearRepeat, uv, _BlitMipLevel) * GaussianWeights[0];
+        color += SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_TrilinearClamp, uv, _BlitMipLevel) * GaussianWeights[0];
         // Packed samples
         [unroll]
         for (int k = 1; k < GAUSSIAN_TAP_COUNT; k++)
         {
-            float2 offset = GaussianOffsets[k] * _BlitTexture_TexelSize * dir;
+            float2 offset = GaussianOffsets[k].xx * _BlitTexture_TexelSize.xy * dir;
 
-            float4 s1 = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_LinearRepeat, uv + offset, _BlitMipLevel);
-            float4 s2 = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_LinearRepeat, uv - offset, _BlitMipLevel);
+            float4 s1 = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_TrilinearClamp, uv + offset, _BlitMipLevel);
+            float4 s2 = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_TrilinearClamp, uv - offset, _BlitMipLevel);
             color += (s1 + s2) * GaussianWeights[k];
         }
         return color;
@@ -39,15 +39,15 @@ Shader "Hidden/GaussianBlur"
         float4 color = 0;
 
         // Center sample
-        color += SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_LinearRepeat, uv, _BlitMipLevel) * GaussianWeights[0];
+        color += SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_TrilinearClamp, uv, _BlitMipLevel) * GaussianWeights[0];
         // Packed samples
         [unroll]
         for (int k = 1; k < GAUSSIAN_TAP_COUNT; k++)
         {
-            float2 offset = GaussianOffsets[k] * _BlitTexture_TexelSize * dir;
+            float2 offset = GaussianOffsets[k].xx * _BlitTexture_TexelSize.xy * dir;
 
-            float4 s1 = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_LinearRepeat, uv + offset, _BlitMipLevel);
-            float4 s2 = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_LinearRepeat, uv - offset, _BlitMipLevel);
+            float4 s1 = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_TrilinearClamp, uv + offset, _BlitMipLevel);
+            float4 s2 = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_TrilinearClamp, uv - offset, _BlitMipLevel);
             color += (s1 + s2) * GaussianWeights[k];
         }
         return color;

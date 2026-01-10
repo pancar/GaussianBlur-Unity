@@ -101,3 +101,5 @@ GaussianBlur/Library/
 GaussianBlur/Temp/
 *.xml
 GaussianBlur/Assets/TextMesh Pro/
+GaussianBlur/obj/
+GaussianBlur/UserSettings/
